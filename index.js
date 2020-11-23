@@ -22,9 +22,9 @@ app.get("/", function (req, res) {
   res.send("hello for use this API you can enter '/api/v1' ");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server started on port ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT, () => {
+//   console.log(`Server started on port ${process.env.PORT}`);
+// });
 
 io.on("connection", (socket) => {
   const id = socket.handshake.query.id;
@@ -34,8 +34,8 @@ io.on("connection", (socket) => {
     console.log(`user with id: ${id} has disconnected`);
   });
 });
-http.listen(process.env.PORT_SOCKET, () => {
-  console.log(`Socket listening on port ${process.env.PORT_SOCKET}`);
+http.listen(process.env.PORT, () => {
+  console.log(`Socket listening on port ${process.env.PORT}`);
 });
 // http.listen(process.env.SOCKET_PORT, () => {
 //   console.log(`Socket listening at " ${process.env.SOCKET_PORT}`);
