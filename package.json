@@ -1,7 +1,7 @@
 {
   "name": "zwallet_serversocketio",
   "version": "1.0.0",
-  "description": "",
+  "description": "zwallet",
   "main": "index.js",
   "engines": {
     "node": "12.x"
