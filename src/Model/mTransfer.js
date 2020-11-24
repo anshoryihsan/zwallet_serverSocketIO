@@ -67,6 +67,8 @@ const transferModel = {
             b.first_name AS to_,
             b.photo AS to_photo,
             amount,
+            trans_name,
+            trans_type,
             note,
             date 
         FROM

@@ -28,6 +28,12 @@ module.exports = {
       .then((data) => response.success(data, res))
       .catch((err) => response.failed(err, res));
   },
+  getBalance: (req, res) => {
+    profileModel
+      .getBalance(req, tokenId)
+      .then((data) => response.success(data, res))
+      .catch((err) => response.failed(err, res));
+  },
   setDataProfile: (req, res) => {
     profileModel
       .setDataProfile(body)

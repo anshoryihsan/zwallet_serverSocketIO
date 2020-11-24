@@ -8,6 +8,7 @@ route
   .get("/tokenId", authJWT.authorization, profile.getDataProfileByTokenId) //, profile.getDataProfileByTokenId
   .get("/search", authJWT.authorization, profile.getDataProfileByName)
   .get("/:id", profile.getDataProfileById)
+  .get("/balance", authJWT.authorization, profile.getBalance)
   // .get("/:id", authJWT.authorization, profile.getDataProfileById)
   .post(
     "/",
