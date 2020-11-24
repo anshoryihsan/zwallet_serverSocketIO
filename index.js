@@ -27,12 +27,13 @@ app.get("/", function (req, res) {
 // });
 
 io.on("connection", (socket) => {
+  console.log(socket);
   const id = socket.handshake.query.id;
-  socket.join(id);
   console.log("a user connected with id: ", id);
-  socket.on("disconnect", () => {
-    console.log(`user with id: ${id} has disconnected`);
-  });
+  // socket.join(id);
+  // socket.on("disconnect", () => {
+  //   console.log(`user with id: ${id} has disconnected`);
+  // });
 });
 http.listen(process.env.PORT, () => {
   console.log(`Socket listening on port ${process.env.PORT}`);

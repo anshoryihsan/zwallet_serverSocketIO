@@ -1,7 +1,7 @@
 const response = require("../../Helpers/res");
 const transferModel = require("../../Model/mTransfer");
-const express = require("express");
-const http = require("http").createServer(express());
+const app = require("express")();
+const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
 module.exports = {
