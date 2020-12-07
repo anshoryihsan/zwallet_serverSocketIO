@@ -35,9 +35,7 @@ const uploadImg = {
           response.failed(err, res);
         }
       } else {
-        req.body.photo = !req.file
-          ? req.file
-          : `/public/image/${req.file.filename}`;
+        req.body.photo = !req.file ? req.file : `${req.file.filename}`;
         next();
       }
     });

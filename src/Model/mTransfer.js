@@ -161,5 +161,105 @@ const transferModel = {
       });
     });
   },
+  getDataIncome: (id, start, end) => {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT
+        profile_id,
+        a.first_name AS from_,
+        receiver_id,
+        b.first_name AS to_,
+        amount,
+        note,
+        date
+        FROM
+        transfer
+        JOIN profile a ON a.id = transfer.profile_id
+        JOIN profile b ON b.id = transfer.receiver_id
+        WHERE
+        receiver_id = ${id}
+        ORDER BY
+        date DESC
+        LIMIT 4 OFFSET 1`;
+      db.query(query, (err, res) => {
+        if (!err) {
+          // console.log(res);
+          // console.log(res, "IN");
+          resolve(res);
+        }
+        // console.log(err);
+        reject(err);
+      });
+    });
+  },
+  getDataOutcome: (id, start, end) => {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT
+        profile_id,
+        a.first_name AS from_,
+        receiver_id,
+        b.first_name AS to_,
+        amount,
+        note,
+        date
+        FROM
+        transfer
+        JOIN profile a ON a.id = transfer.profile_id
+        JOIN profile b ON b.id = transfer.receiver_id
+        WHERE
+        profile_id = ${id}
+        ORDER BY
+        date DESC
+        LIMIT 4 OFFSET 1`;
+      db.query(query, (err, res) => {
+        if (!err) {
+          // console.log(res);
+          // console.log(res, "Out");
+          resolve(res);
+        }
+        // console.log(err);
+        reject(err);
+      });
+    });
+  },
+  getDataFilter: (section, startend) => {
+    console.log(section);
+    console.log(startend);
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT
+            profile_id,
+            a.first_name AS from_,
+            a.photo AS from_photo,
+            receiver_id,
+            b.first_name AS to_,
+            b.photo AS to_photo,
+            amount,
+            trans_name,
+            trans_type,
+            note,
+            date
+        FROM
+            transfer
+            JOIN profile a ON a.id = transfer.profile_id
+            JOIN profile b ON b.id = transfer.receiver_id
+        WHERE
+            ${section}
+            and (date BETWEEN ${startend})
+        ORDER BY
+            date ASC
+            LIMIT 4 OFFSET 1
+        `;
+      // console.log(query);
+      db.query(query, (err, res) => {
+        if (!err) {
+          console.log(res);
+          // console.log(res, "netr<al");
+          resolve(res);
+        }
+        console.log(err);
+        reject(err);
+      });
+    });
+  },
 };
 module.exports = transferModel;

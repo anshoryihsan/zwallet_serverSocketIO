@@ -2,6 +2,9 @@
 const response = require("../../Helpers/res");
 // const upload = require("../../Helpers/upload");
 const profileModel = require("../../Model/mProfile");
+const app = require("express")();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 module.exports = {
   getDataProfile: (req, res) => {
@@ -96,10 +99,12 @@ module.exports = {
     // });
   },
   updatePatchDataProfile: (req, res) => {
+    console.log(req.body);
     profileModel
       .updatePatchDataProfile(req.tokenId, req.body)
       .then((data) => response.success(data, res))
       .catch((err) => response.failed(err, res));
+
     // const uploadImage = upload.single("image");
     // uploadImage(req, res, (err) => {
     //   // if (err) {

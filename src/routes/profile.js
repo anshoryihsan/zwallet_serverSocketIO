@@ -24,6 +24,9 @@ route
     uploadImg.singleUpload,
     profile.updateDataProfile
   )
+  // .patch("/", uploadImg.singleUpload, (req, res) => {
+  //   console.log(req.body);
+  // })
   .patch(
     "/",
     authJWT.authorization,

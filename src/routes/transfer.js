@@ -7,6 +7,7 @@ transferTopUp
   .patch("/", authJWT.authorization, transfer.transfer)
   .get("/search", authJWT.authorization, transfer.getAllDataTransferSearch)
   .post("/", authJWT.authorization, transfer.setTransfer)
+  .post("/filter", authJWT.authorization, transfer.transferFilter)
   .put(
     "/:id",
     authJWT.authorization,
@@ -19,5 +20,9 @@ transferTopUp
     authJWT.permitAdmin,
     transfer.deleteTransfer
   );
+// .post("/filter", (req, res) => {
+//   console.log(req.query);
+//   console.log(req.body);
+// });
 
 module.exports = transferTopUp;
