@@ -5,6 +5,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
+
+app.use(logger("dev"));
+app.use(cors());
+
 const indexRoutes = require("./src/routes/index");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
@@ -19,9 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/v1/", indexRoutes);
 // SocketListener(io);
-
-app.use(logger("dev"));
-app.use(cors());
 
 app.get("/", function (req, res) {
   res.send("hello for use this API you can enter '/api/v1' ");
