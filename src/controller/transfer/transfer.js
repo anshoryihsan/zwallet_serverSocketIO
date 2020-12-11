@@ -12,7 +12,6 @@ module.exports = {
     transferModel
       .transfer(req.tokenId, req.body)
       .then((data) => {
-        // const { receiver_id, amount } = data;
         io.on("connection", (socket) => {
           // console.log(receiver_id, amount, "sdasdaksdkasjdkajskdjakjs");
           //   const title = `Transfer Success`;
@@ -77,31 +76,11 @@ module.exports = {
     } else {
       b = `"" AND ""`;
     }
-    // console.log(a);
-    // console.log(b);
 
     transferModel
       .getDataFilter(a, b)
       .then((data) => response.success(data, res))
       .catch((err) => response.failed(err, res));
-    // if (filter === "income") {
-    //   transferModel
-    //     .getDataIncome(req.tokenId, startDate, endDate)
-    //     .then((data) => response.success(data, res))
-    //     .catch((err) => response.failed(err, res));
-    // } else if (filter == "outcome") {
-    //   // console.log(filter);
-    //   transferModel
-    //     .getDataOutcome(req.tokenId, startDate, endDate)
-    //     .then((data) => response.success(data, res))
-    //     .catch((err) => response.failed(err, res));
-    // }
-    // else if (filter === "date") {
-    //   transferModel
-    //     .getDataFilter(req.tokenId, startDate, endDate)
-    //     .then((data) => response.success(data, res))
-    //     .catch((err) => response.failed(err, res));
-    // }
   },
   updateTransfer: (req, res) => {
     transferModel

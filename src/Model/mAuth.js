@@ -22,14 +22,10 @@ const authModel = {
     });
   },
   login: (body) => {
-    // console.log(body, 'body');
     return new Promise((resolve, reject) => {
-      const { email, password } = body;
-      // console.log(email, "email");
+      const { email } = body;
       const query = "SELECT * FROM profile WHERE email=?";
       db.query(query, email, async (err, data) => {
-        // let dataUser = await data[0];
-        // console.log(data[0], 'data');
         if (data[0] === undefined) {
           reject("Email Not Found.");
         } else {
@@ -55,9 +51,12 @@ const authModel = {
                 } else {
                   const sql = "SELECT * FROM profile WHERE password=?";
                   db.query(sql, dataUser.password, (err, data) => {
-                    // console.log(data[0].role_id);
                     if (!err) {
-                      resolve({ role: data[0].role_id, token: token });
+                      resolve({
+                        id_user: data[0].id,
+                        role: data[0].role_id,
+                        token: token,
+                      });
                     } else {
                       reject("your password is incorect");
                     }

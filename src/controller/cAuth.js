@@ -9,7 +9,6 @@ module.exports = {
       .catch((err) => response.failed(err.message, res));
   },
   login: (req, res) => {
-    console.log(req.body);
     authModel
       .login(req.body)
       .then((data) => response.success(data, res, "Login Successfull"))

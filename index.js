@@ -7,7 +7,7 @@ const logger = require("morgan");
 const cors = require("cors");
 
 app.use(logger("dev"));
-app.use(cors());
+app.use("*", cors());
 
 const indexRoutes = require("./src/routes/index");
 const http = require("http").createServer(app);
@@ -69,5 +69,3 @@ app.use(express.static("public"));
 http.listen(process.env.PORT, () => {
   console.log(`Socket listening on port ${process.env.PORT}`);
 });
-
-// socketListener(io);
