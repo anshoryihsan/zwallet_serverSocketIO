@@ -28,42 +28,39 @@ app.get("/", function (req, res) {
   res.send("hello for use this API you can enter '/api/v1' ");
 });
 
-// io.on("connection", (socket) => {
-//   // console.log(socket);
-//   // // console.log(socket.handshake.query);
-//   // // const id = socket.handshake.query.id;
-//   const id = socket.handshake.query.id;
-//   socket.join(id);
-//   console.log(`user ${id} connected`);
-//   db.query(`SELECT balance FROM profile where id=${id}`, (err, data) => {
-//     if (!err) {
-//       io.to(id).emit("get_info_balance", data);
-//     } else {
-//       console.log(err);
-//     }
-//   });
+io.on("connection", (socket) => {
+  const id = socket.handshake.query.id;
+  socket.join(id);
+  console.log(`user ${id} connected`);
+  db.query(`SELECT balance FROM profile where id=${id}`, (err, data) => {
+    if (!err) {
+      io.to(id).emit("get_info_balance", data);
+    } else {
+      console.log(err);
+    }
+  });
 
-//   // socket.on("info_balance", ({ id }) => {
-//   //   // console.log(id);
-//   //   if (id) {
-//   //     db.query(`SELECT balance FROM profile where id=${id}`, (err, data) => {
-//   //       if (!err) {
-//   //         // console.log(data);
-//   //         // socket.join(id);
-//   //         io.to(id).emit("get_info_balance", data);
-//   //       } else {
-//   //         console.log(err);
-//   //       }
-//   //     });
-//   //   }
-//   // });
+  // socket.on("info_balance", ({ id }) => {
+  //   // console.log(id);
+  //   if (id) {
+  //     db.query(`SELECT balance FROM profile where id=${id}`, (err, data) => {
+  //       if (!err) {
+  //         // console.log(data);
+  //         // socket.join(id);
+  //         io.to(id).emit("get_info_balance", data);
+  //       } else {
+  //         console.log(err);
+  //       }
+  //     });
+  //   }
+  // });
 
-//   // io.to(id).emit("transaction", { title: " message " });
-//   socket.on("disconnect", () => {
-//     // console.log(`user disconnected`);
-//     console.log(`user with id: ${id} has disconnected`);
-//   });
-// });
+  // io.to(id).emit("transaction", { title: " message " });
+  socket.on("disconnect", () => {
+    // console.log(`user disconnected`);
+    console.log(`user with id: ${id} has disconnected`);
+  });
+});
 
 app.use(express.static("public"));
 http.listen(process.env.PORT, () => {
