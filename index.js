@@ -57,7 +57,6 @@ io.on("connection", (socket) => {
 
   // io.to(id).emit("transaction", { title: " message " });
   socket.on("disconnect", () => {
-    // console.log(`user disconnected`);
     console.log(`user with id: ${id} has disconnected`);
   });
 });
